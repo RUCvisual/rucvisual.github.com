@@ -1,0 +1,199 @@
+﻿<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>中国人民大学本科生源分布情况</title>
+<link rel="stylesheet" href="../stylesheets/mystyle.css"/>
+</head>
+<body>
+      <table width="100%" height="100%" border="0">
+        <tr>
+        <td width="15%"></td>
+        <td colspan="2"style="font-family:art;font-size:1.5em" width="60%"><strong><center>中国人民大学2012-2015年本科生源地分布图</center></strong><br>
+          
+        </td>
+        <td width="15"></td>
+        </tr>
+        <tr>
+        <td></td>
+        <td width="50%"><div id="main" style="height:600px;font-family:art"></div></td>
+        <td width="20%" style="font-family:art;font-size:1.2em">
+        <Strong>·本图动态展示了本科生源地</Strong><br>
+          ·颜色越红表示该省/市/自治区当年的招生数越多；将鼠标移至左下角的图例可查看招生数在指定范围内的省份。<br>
+          ·本科生源由三部分构成：高考/自主招生/保送，使用左上角的按钮可以选择/取消选择查看各部分学生。<br>
+          ·本页面展示的是2012-2015年数据，您可以使用图片右侧的箭头来选择年份，或点击播放键自动切换。<br>
+          ·点击右边的按钮可以查看数据或截取图片。
+         </td>
+        <td></td>
+        </tr>
+      </table>
+    <script src="../echarts/build/dist/echarts.js"></script>
+    <script src="data.js"></script>
+    <script type="text/javascript">
+        require.config({
+            paths: {echarts: '../echarts/build/dist'}
+        });
+        require(
+            [
+                'echarts',
+                'echarts/chart/map'
+            ],
+            function (ec) {
+                var myChart = ec.init(document.getElementById('main'));
+                var option = {  
+				 timeline : {
+        //时间轴时间列表
+        data:['','','',''],
+        label:{
+            formatter : function(s) {
+            return s.slice(0,2);
+          }
+        },
+        //时间轴的位置设定
+        y:330,
+        x:1000,
+		y2:340,
+		lineStyle:{
+		color:'#666699',
+		width:1,
+		type:'dotted'
+		},
+		symbolSize:1,
+		
+        //时间轴播放控制
+		realtime:true,
+		controlPosition:'right'
+    },
+				options:[{
+				padding:200,
+				title : {
+        text: '2012 年本科生源分布情况',
+        subtext: '数据虚构为展示需要，真实数据待后续更新',
+        x:'center'
+    },
+    tooltip : {
+        trigger: 'item'
+    },
+    legend: {
+        orient: 'vertical',
+        x:'left',
+        data:['高考','自主招生','保送']},
+    dataRange: mapdatarange,
+    toolbox: maptoolbox,
+    series : [
+        {
+            name: '高考',
+            type: 'map',
+            mapType: 'china',
+			 itemStyle:{
+                normal:{label:{show:true}},
+                emphasis:{label:{show:true}}
+            },
+            roam: false,
+           
+            data:EE2012
+        },
+        {
+            name: '自主招生',
+            type: 'map',
+            mapType: 'china',
+            data:AE2012
+        },
+        {
+            name: '保送',
+            type: 'map',
+            mapType: 'china',
+           
+            data:RA2012
+        }
+    ]
+				},
+				{
+				title : {
+        text: '2013 年本科生源分布情况'
+    },
+	series:[
+        {
+            name: '高考',
+            type: 'map',
+            mapType: 'china',
+            roam: false,
+           
+            data:EE2013
+        },
+        {
+            name: '自主招生',
+            type: 'map',
+            mapType: 'china',
+           
+            data:AE2013
+        },
+        {
+            name: '保送',
+            type: 'map',
+            mapType: 'china',
+           
+            data:RA2013
+        }
+    ]
+				},
+				{
+				title : {
+        text: '2014 年本科生源分布情况'
+    },
+	series:[
+        {
+            name: '高考',
+            type: 'map',
+            mapType: 'china',
+            roam: false,
+           
+            data:EE2014
+        },
+        {
+            name: '自主招生',
+            type: 'map',
+            mapType: 'china',
+           
+            data:AE2014
+        },
+        {
+            name: '保送',
+            type: 'map',
+            mapType: 'china',
+           
+            data:RA2014
+        }
+    ]
+				},
+				{
+				title : {
+        text: '2015 年本科生源分布情况'
+    },
+	series:[
+        {
+            name: '高考',
+            type: 'map',
+            mapType: 'china',
+            roam: false,
+           
+            data:EE2015
+        },
+        {
+            name: '自主招生',
+            type: 'map',
+            mapType: 'china',data:AE2015
+        },
+        {
+            name: '保送',
+            type: 'map',
+            mapType: 'china',data:RA2015
+        }
+    ]
+				}
+				]
+                };
+                myChart.setOption(option);
+            }
+        );
+    </script>
+</body>

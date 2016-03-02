@@ -1,0 +1,154 @@
+﻿<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>中国人民大学本科生毕业去向</title>
+<link rel="stylesheet" href="../stylesheets/mystyle.css"/>
+</head>
+<body>
+      <table width="100%" height="100%" border="0">
+        <tr>
+        <td width="15%"></td>
+        <td colspan="2"style="font-family:art;font-size:1.5em" width="60%"><strong><center>中国人民大学2015届本科生毕业去向图</center></strong><br>  
+        </td>
+        <td width="15"></td>
+        </tr>
+        <tr>
+        <td></td>
+        <td width="50%"><div id="main" style="height:500px;font-family:art"></div></td>
+        <td width="20%" style="font-family:art;font-size:1.2em">
+        <Strong>·本图展示了学生来源/去向</Strong><br>
+          ·左半圆表示学生来源，右半圆表示学生去向。<br>
+          ·将鼠标移至左半圆查看不同来源学生的去向，将鼠标移至右半查看不同去向学生的来源。左边未关联右边部分可能是肄业/延毕/数据缺失，右边未关联左边部分可能是转专业降级/休学/上年延毕/非四年制的学生。<br>
+          ·目前页面展示的是静态数据，也可做成动态展示多个年份的情况。<br>
+          ·点击右边的按钮可以查看数据或截取图片。
+         </td>
+        <td></td>
+        </tr>
+      </table>
+    <script src="../echarts/build/dist/echarts.js"></script>
+    <script src="data.js"></script>
+ <script type="text/javascript">
+        //·
+        require.config({
+            paths: {
+                echarts: '../echarts/build/dist'
+            }
+        });
+        
+        require(
+            [
+                'echarts',
+				'echarts/chart/chord',
+            ],
+            function (ec) {
+                var myChart = ec.init(document.getElementById('main')); 
+                
+               
+var option = {
+    title : {
+        text: '',
+        subtext: '(数据为展示需要，真实数据待后续更新)',
+    },
+    tooltip : {
+        trigger: 'item',
+        formatter: function (params) {
+            if (params.indicator2) { // is edge
+                return params.value.weight;
+            } else {// is node
+                return params.name
+            }
+        }
+    },
+    toolbox: {
+        show : true,
+        y:'bottom',
+        feature : {
+            saveAsImage:{show:true}
+        }
+    },
+    legend: {
+        x: 'right',
+        data:['保送','自招','高考','保研','考研','出国','工作']
+    },
+    series : [
+        {
+            type:'chord',
+            radius : ['50%', '70%'],
+            center : ['50%', '60%'],
+            padding : 3,
+            sort : 'none', // can be 'none', 'ascending', 'descending'
+            sortSub : 'none', // can be 'none', 'ascending', 'descending'
+            startAngle : 90,
+            clockWise : false,
+            showScale : false,
+            showScaleText : true,
+            itemStyle : {
+                normal : {
+                    borderWidth : 0,
+                    borderColor : '#000',
+                    chordStyle : {
+                        borderWidth : 1,
+                        borderColor : '#333'
+                    },
+                    label: {
+                        show: true,
+                        color: 'black'
+                    }
+                },
+                emphasis : {
+                    borderWidth : 0,
+                    borderColor : '#000',
+                    chordStyle : {
+                        borderWidth : 2,
+                        borderColor : 'black'
+                    }
+                }
+            },
+            data : [
+                {
+                    name : '保送',
+                    itemStyle : {normal: {
+                            color: 'rgba(255,30,30,0.5)'},
+                        emphasis: {
+                            color: 'yellow',
+                            lineStyle : {
+                                width: 2,
+                                color: 'blue'
+                            }
+                        }
+                    }
+                },
+                {name : '自招'},
+                {name : '高考'},
+                {name : '保研'},
+                {name : '考研'},
+                {name : '出国'},
+                {name : '工作'},
+            ],
+            matrix : [
+                [10,0,0,132,36,67,24],
+                [0,12,0,178,12,294,23],
+				[0,0,46,695,322,988,397],
+                [132,178,695,0,0,0,0],
+                [36,12,322,0,15,0,0],
+                [67,294,988,0,0,12,0],
+                [24,23,397,0,0,0,16],
+            ],
+            markPoint : {
+                symbol: 'circle',
+                data : [
+                    {name : '2011级入学人数', value:'3236' , x:'10%', y:'40%', symbolSize:36},
+                   {name : '2015届毕业数', value:'3211' , x:'10%', y:'60%', symbolSize:36}
+                ]
+            }
+        }
+    ]
+};
+                    
+
+        
+                myChart.setOption(option); 
+            }
+        );
+    </script>
+</body>
